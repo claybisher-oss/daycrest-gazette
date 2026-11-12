@@ -24,3 +24,10 @@ footer { text-align:center; color:var(--muted); font-size:.8rem; padding:2rem 1r
 .brief { border:1px solid var(--rule); border-left:4px solid var(--ink); padding:.4rem 1rem; margin:0 0 1.2rem; }
 .brief p { margin:.3rem 0; } .brief ul { margin:.2rem 0 .5rem; padding-left:1.2rem; }
 figure { margin:1.4rem 0; } figcaption { font-size:.85rem; color:var(--muted); font-style:italic; text-align:center; }
+.toc { border:1px solid var(--rule); padding:.4rem 1rem; margin:0 0 1rem; }
+.toc ol { margin:.3rem 0 .5rem; padding-left:1.3rem; } .toc li { margin:.2rem 0; }
+.story { margin-top:1.5rem; } .story h2 { font-size:1.5rem; line-height:1.25; margin:.2rem 0 .8rem; }
+.back { font-size:.85rem; text-align:right; } ul.issue { padding-left:1.1rem; } ul.issue li { margin:.35rem 0; }
+table { border-collapse:collapse; width:100%; font-size:.85rem; margin:1rem 0; }
+th, td { border-bottom:1px solid var(--rule); padding:.25rem .3rem; text-align:left; }
+th { font-variant: small-caps; }

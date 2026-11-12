@@ -4,7 +4,7 @@ date: 2026-11-12 14:30
 section: Front Page
 summary: What lands in this feed each weekday, and how to read it.
 brief: A new issue every weekday, starting Monday, November 16 | Every story is a full article, written as an explainer with the source linked at the end | New posts from followed creators become write-ups, so you can read instead of watch
-issue: 0
+issue: Sample
 ---
 This is the Gazette's home in NetNewsWire. Every weekday morning the news and the creators you follow get turned into articles you can read straight through, here and in the PDF edition.
 

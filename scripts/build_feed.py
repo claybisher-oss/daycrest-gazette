@@ -74,6 +74,18 @@ def markdown_to_html(md: str) -> str:
     para: list[str] = []
     list_tag: str | None = None
     quote: list[str] = []
+    table: list[str] = []
+
+    def flush_table():
+        if not table:
+            return
+        rows = [[c.strip() for c in r.strip().strip("|").split("|")] for r in table]
+        rows = [r for r in rows if not all(re.fullmatch(r":?-{2,}:?", c) for c in r)]
+        head, body = rows[0], rows[1:]
+        out.append('<table><thead><tr>' + "".join(f"<th>{inline(c)}</th>" for c in head) + "</tr></thead><tbody>"
+                   + "".join("<tr>" + "".join(f"<td>{inline(c)}</td>" for c in r) + "</tr>" for r in body)
+                   + "</tbody></table>")
+        table.clear()
 
     def flush_para():
         if para:
@@ -93,6 +105,11 @@ def markdown_to_html(md: str) -> str:
 
     for raw in md.splitlines():
         line = raw.rstrip()
+        if line.lstrip().startswith("|"):
+            flush_para(); flush_list(); flush_quote()
+            table.append(line)
+            continue
+        flush_table()
         if line.startswith(">"):
             flush_para(); flush_list()
             quote.append(line[1:].lstrip())
@@ -127,7 +144,7 @@ def markdown_to_html(md: str) -> str:
             continue
         flush_list()
         para.append(line.strip())
-    flush_para(); flush_list(); flush_quote()
+    flush_para(); flush_list(); flush_quote(); flush_table()
     return "\n".join(out)
 
 
@@ -180,6 +197,8 @@ def parse_article(path: Path) -> dict | None:
         "summary": meta.get("summary", ""), "issue": meta.get("issue", ""),
         "source_url": meta.get("source_url", ""), "html": body,
         "minutes": max(1, round(words / 230)),
+        "words": words,
+        "edition": meta.get("edition", "").strip().title(),
     }
 
 
@@ -188,40 +207,68 @@ def section_slug(name: str) -> str:
 
 
 # ---------------------------------------------------------------- output
+# One feed item per issue: all of a day's articles combined into a single post.
+# An article may set `edition: Breakfast|Lunch|Dinner` to split a day into at most three posts.
+SECTION_ORDER = ["Almanac", "Weather", "Front Page", "Nation & World", "Faith", "Wildcats",
+                 "Around Town", "Creek Report", "Kentucky Voices", "Turntable", "Sky",
+                 "Farm & Garden", "Creed & Controversy", "Ideas", "Crossword", "Followed", "Nature"]
+EDITION_ORDER = {"Breakfast": 0, "": 1, "Lunch": 1, "Dinner": 2}
+
+
 def absolutize(body: str, base: str) -> str:
     """Feed readers need absolute URLs for images and in-site links."""
     return re.sub(r'(src|href)="(?!https?:|mailto:|#)/?([^"]+)"', rf'\1="{base}\2"', body)
 
 
-def rss(items: list[dict], title: str, desc: str, self_url: str, base: str) -> str:
+def build_issues(arts: list[dict]) -> list[dict]:
+    groups: dict[tuple, list[dict]] = {}
+    for a in arts:
+        groups.setdefault((a["date"].date(), a["edition"]), []).append(a)
+    issues = []
+    for (day, ed), items in groups.items():
+        items.sort(key=lambda a: (SECTION_ORDER.index(a["section"]) if a["section"] in SECTION_ORDER
+                                  else len(SECTION_ORDER), a["date"]))
+        nums = [a["issue"] for a in items if a["issue"]]
+        slug = day.isoformat() + (f"-{ed.lower()}" if ed else "")
+        when = max(a["date"] for a in items)
+        title = f"{CONFIG['title']} — {day.strftime('%a, %b %-d, %Y')}" + (f" · {ed}" if ed else "")
+        toc = "".join(f"<li><a href='#{a['slug']}'>{html.escape(a['title'])}</a> "
+                      f"<span class='sec'>{html.escape(a['section'])}</span></li>" for a in items)
+        parts = [f"<nav class='toc'><p><strong>In this issue</strong> · "
+                 f"{max(1, round(sum(a['words'] for a in items) / 230))} min read</p><ol>{toc}</ol></nav>"]
+        for a in items:
+            parts.append(f"<section class='story' id='{a['slug']}'><div class='kicker'>{html.escape(a['section'])}"
+                         f" · {a['minutes']} min</div><h2>{html.escape(a['title'])}</h2>{a['html']}"
+                         f"<p class='back'><a href='#top'>↑ Contents</a></p></section>")
+        summary = " · ".join(a["title"] for a in items[:4]) + (" …" if len(items) > 4 else "")
+        issues.append({"slug": slug, "title": title, "date": when, "edition": ed,
+                       "number": nums[0] if nums else "", "summary": summary, "items": items,
+                       "html": "\n<hr>\n".join(parts)})
+    issues.sort(key=lambda i: (i["date"].date(), EDITION_ORDER.get(i["edition"], 1)), reverse=True)
+    return issues
+
+
+def rss(issues: list[dict], base: str) -> str:
     now = format_datetime(datetime.now(timezone.utc))
+    t = html.escape(CONFIG["title"])
     parts = [
         '<?xml version="1.0" encoding="UTF-8"?>',
         '<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" '
         'xmlns:atom="http://www.w3.org/2005/Atom">',
-        "<channel>",
-        f"<title>{html.escape(title)}</title>",
-        f"<link>{base}</link>",
-        f"<description>{html.escape(desc)}</description>",
-        "<language>en-us</language>",
-        f"<lastBuildDate>{now}</lastBuildDate>",
-        f'<atom:link href="{self_url}" rel="self" type="application/rss+xml"/>',
-        f"<image><url>{base}icon.png</url><title>{html.escape(title)}</title><link>{base}</link></image>",
+        "<channel>", f"<title>{t}</title>", f"<link>{base}</link>",
+        f"<description>{html.escape(CONFIG.get('description', ''))}</description>",
+        "<language>en-us</language>", f"<lastBuildDate>{now}</lastBuildDate>",
+        f'<atom:link href="{base}feed.xml" rel="self" type="application/rss+xml"/>',
+        f"<image><url>{base}icon.png</url><title>{t}</title><link>{base}</link></image>",
     ]
-    for a in items:
-        link = f"{base}a/{a['slug']}.html"
-        body = absolutize(a["html"], base).replace("]]>", "]]]]><![CDATA[>")
-        parts += [
-            "<item>",
-            f"<title>{html.escape(a['title'])}</title>",
-            f"<link>{link}</link>",
-            f'<guid isPermaLink="true">{link}</guid>',
-            f"<pubDate>{format_datetime(a['date'])}</pubDate>",
-            f"<category>{html.escape(a['section'])}</category>",
-            f"<description>{html.escape(a['summary'] or a['title'])}</description>",
-            f"<content:encoded><![CDATA[{body}]]></content:encoded>",
-            "</item>",
-        ]
+    for i in issues:
+        link = f"{base}a/{i['slug']}.html"
+        body = absolutize(i["html"], base).replace("]]>", "]]]]><![CDATA[>")
+        body = body.replace("href='#", f"href='{link}#")
+        parts += ["<item>", f"<title>{html.escape(i['title'])}</title>", f"<link>{link}</link>",
+                  f'<guid isPermaLink="true">{link}</guid>', f"<pubDate>{format_datetime(i['date'])}</pubDate>",
+                  f"<description>{html.escape(i['summary'])}</description>",
+                  f"<content:encoded><![CDATA[{body}]]></content:encoded>", "</item>"]
     parts += ["</channel>", "</rss>"]
     return "\n".join(parts) + "\n"
 
@@ -236,10 +283,10 @@ def page(title: str, inner: str, base: str) -> str:
 <link rel="alternate" type="application/rss+xml" title="{name}" href="{base}feed.xml">
 <link rel="icon" href="{base}icon.png">
 <link rel="stylesheet" href="{base}style.css">
-</head><body>
+</head><body id="top">
 <header class="mast"><a href="{base}">{name}</a><div class="motto">{html.escape(CONFIG.get('motto', ''))}</div></header>
 <main>{inner}</main>
-<footer>Written for one reader. Summaries are in our own words; follow the links to support the original creators.</footer>
+<footer>Written for one reader. Summaries are in our own words; follow the links to read the full stories and support the original creators.</footer>
 </body></html>
 """
 
@@ -247,12 +294,11 @@ def page(title: str, inner: str, base: str) -> str:
 def main() -> None:
     base = base_url()
     arts = [a for p in sorted(ARTICLES.glob("*.md")) if (a := parse_article(p))]
-    arts.sort(key=lambda a: a["date"], reverse=True)
+    issues = build_issues(arts)
 
     if OUT.exists():
         shutil.rmtree(OUT)
     (OUT / "a").mkdir(parents=True)
-    (OUT / "feeds").mkdir()
     if STATIC.exists():
         for f in STATIC.iterdir():
             if f.is_file():
@@ -260,44 +306,26 @@ def main() -> None:
             elif f.is_dir():
                 shutil.copytree(f, OUT / f.name)
 
-    title, desc = CONFIG["title"], CONFIG.get("description", "")
-    (OUT / "feed.xml").write_text(rss(arts[:FEED_LIMIT], title, desc, f"{base}feed.xml", base), encoding="utf-8")
+    (OUT / "feed.xml").write_text(rss(issues[:FEED_LIMIT], base), encoding="utf-8")
+    for i in issues:
+        meta = i["date"].strftime("%A, %B %-d, %Y") + (f" · {i['edition']}" if i["edition"] else "")
+        if i["number"]:
+            meta += f" · No. {i['number']}"
+        inner = f"<article><div class='kicker'>{html.escape(meta)}</div>{absolutize(i['html'], base)}</article>"
+        (OUT / "a" / f"{i['slug']}.html").write_text(page(i["title"], inner, base), encoding="utf-8")
 
-    sections: dict[str, list[dict]] = {}
-    for a in arts:
-        sections.setdefault(a["section"], []).append(a)
-    for name, items in sections.items():
-        s = section_slug(name)
-        (OUT / "feeds" / f"{s}.xml").write_text(
-            rss(items[:FEED_LIMIT], f"{title} — {name}", desc, f"{base}feeds/{s}.xml", base),
-            encoding="utf-8")
-
-    for a in arts:
-        meta = f"{a['section']} · {a['date'].strftime('%a %b %-d, %Y')} · {a['minutes']} min read"
-        if a["issue"]:
-            meta += f" · No. {a['issue']}"
-        inner = (f'<article><div class="kicker">{html.escape(meta)}</div>'
-                 f"<h1>{html.escape(a['title'])}</h1>{absolutize(a['html'], base)}</article>")
-        (OUT / "a" / f"{a['slug']}.html").write_text(page(a["title"], inner, base), encoding="utf-8")
-
-    rows, last_day = [], None
-    for a in arts[:FEED_LIMIT]:
-        day = a["date"].strftime("%A, %B %-d, %Y")
-        if day != last_day:
-            rows.append(f"<h2 class='day'>{day}</h2>")
-            last_day = day
-        rows.append(f"<p class='row'><span class='sec'>{html.escape(a['section'])}</span> "
-                    f"<a href='{base}a/{a['slug']}.html'>{html.escape(a['title'])}</a>"
-                    + (f"<br><span class='dek'>{html.escape(a['summary'])}</span>" if a["summary"] else "")
-                    + "</p>")
-    feeds = " · ".join(f"<a href='{base}feeds/{section_slug(n)}.xml'>{html.escape(n)}</a>"
-                       for n in sorted(sections))
-    inner = (f"<p class='subscribe'>Subscribe in NetNewsWire: <a href='{base}feed.xml'>{base}feed.xml</a>"
-             f"<br>Section feeds: {feeds or '—'}</p>" + "\n".join(rows))
-    (OUT / "index.html").write_text(page(title, inner, base), encoding="utf-8")
+    rows = [f"<p class='subscribe'>Subscribe in NetNewsWire: <a href='{base}feed.xml'>{base}feed.xml</a></p>"]
+    for i in issues[:FEED_LIMIT]:
+        rows.append(f"<h2 class='day'><a href='{base}a/{i['slug']}.html'>"
+                    f"{html.escape(i['date'].strftime('%A, %B %-d, %Y'))}"
+                    + (f" · {html.escape(i['edition'])}" if i["edition"] else "") + "</a></h2><ul class='issue'>"
+                    + "".join(f"<li><span class='sec'>{html.escape(a['section'])}</span> "
+                              f"<a href='{base}a/{i['slug']}.html#{a['slug']}'>{html.escape(a['title'])}</a></li>"
+                              for a in i["items"]) + "</ul>")
+    (OUT / "index.html").write_text(page(CONFIG["title"], "\n".join(rows), base), encoding="utf-8")
     (OUT / "robots.txt").write_text("User-agent: *\nDisallow: /\n", encoding="utf-8")
     (OUT / ".nojekyll").write_text("", encoding="utf-8")
-    print(f"built {len(arts)} articles, {len(sections)} sections → {OUT} (base {base})")
+    print(f"built {len(arts)} articles into {len(issues)} issue(s) → {OUT} (base {base})")
 
 
 if __name__ == "__main__":

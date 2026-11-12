@@ -8,6 +8,12 @@ This repo is **public** (GitHub Pages). Anyone with the link can read it.
 - Workbook packets, coursework, grades, Canvas material, prayer requests, health.
 - Anything from Clay's email, Todoist, Obsidian vault, or iCloud Library.
 
+## One post a day
+The feed shows **one post per day**: the build combines every article dated that day into a single issue with a contents list at the top. Clay wants no more than that. Only if a day truly needs it, an article may carry `edition: Breakfast`, `edition: Lunch` or `edition: Dinner` to split the day into at most three posts. The weekday default is one issue, with no `edition` field.
+
+## Weather: always hour by hour
+Whenever the forecast appears (feed or PDF), give the **hour-by-hour forecast for Lexington, KY** from the National Weather Service hourly forecast (api.weather.gov gridpoint `/forecast/hourly`, or forecast.weather.gov's hourly view): one row per hour from 6 AM to 10 PM with temperature, sky/conditions, chance of rain and wind. In the feed use a `Weather` article with a short summary line, then a Markdown table (`| Time | Temp | Sky | Rain | Wind |`), and link the exact NWS page as `source_url`. In the PDF use a compact table in the same columns.
+
 ## Every article
 - One file: `articles/YYYY-MM-DD-short-slug.md` with front matter (`title`, `date: YYYY-MM-DD HH:MM` Eastern, `section`, `summary`, optional `source`, `source_url`, `issue`).
 - **Own words only.** No pasted article text, transcripts, lyrics or post-1928 poems. A quote is rare, under 15 words, one per source.

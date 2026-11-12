@@ -5,7 +5,7 @@
 A weekday paper for one reader, published as full-text RSS for NetNewsWire.
 
 - **Feed:** `https://<owner>.github.io/daycrest-gazette/feed.xml`
-- **Section feeds:** `…/feeds/followed.xml`, `…/feeds/front-page.xml`, etc.
+- **One post per day:** each day's articles are combined into a single issue.
 - **Articles:** `articles/*.md` (see `WRITING.md` for format and rules)
 - **Followed creators:** `sources.json`
 - **Build:** `python3 scripts/build_feed.py` → `_site/` (standard library only). GitHub Actions builds and deploys on every push to `main`.
