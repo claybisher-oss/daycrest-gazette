@@ -13,7 +13,7 @@ This repo is **public** (GitHub Pages). Anyone with the link can read it.
 - **Own words only.** No pasted article text, transcripts, lyrics or post-1928 poems. A quote is rare, under 15 words, one per source.
 - Verified facts; link the original in `source_url`.
 - Images: public-domain or openly licensed only, credited, saved under `static/img/`.
-- Sections: `Front Page`, `NPR`, `Faith`, `Wildcats`, `Weather`, `Around Town`, `Creek Report`, `Kentucky Voices`, `Turntable`, `Nature` (Species of the Day), `Followed`.
+- Sections: `Front Page`, `Nation & World`, `Faith`, `Wildcats`, `Weather`, `Around Town`, `Creek Report`, `Kentucky Voices`, `Turntable`, `Nature` (Species of the Day), `Followed`.
 
 ## Explainer format (every article that's more than a brief)
 Modeled on AI "visual explainer" daily briefs: understand it in two minutes, go deeper if you want.

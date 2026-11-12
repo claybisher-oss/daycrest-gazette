@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 420" font-family="Georgia, 'Iowan Old Style', serif">
+  <rect width="400" height="420" fill="#faf7f0"/>
+  <defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1d1b18"/></marker></defs>
+  <g fill="none" stroke="#1d1b18" stroke-width="1.6">
+    <rect x="50" y="15" width="300" height="80" rx="6" stroke-dasharray="5 4"/>
+    <rect x="50" y="140" width="300" height="80" rx="6"/>
+    <rect x="50" y="265" width="300" height="80" rx="6" stroke-width="2.8"/>
+    <path d="M200,95 L200,137" marker-end="url(#ar)"/>
+    <path d="M200,220 L200,262" marker-end="url(#ar)"/>
+  </g>
+  <g fill="#1d1b18" text-anchor="middle">
+    <text x="200" y="48" font-size="17" font-weight="bold">The myth</text>
+    <text x="200" y="72" font-size="15">an all-powerful AI is coming</text>
+    <text x="200" y="173" font-size="17" font-weight="bold">The race</text>
+    <text x="200" y="197" font-size="15">shortcuts to reach it first</text>
+    <text x="200" y="298" font-size="17" font-weight="bold">The real harm</text>
+    <text x="200" y="322" font-size="15">reckless experiments, fear</text>
+    <text x="200" y="378" font-size="15" font-style="italic">His fix: useful products +</text>
+    <text x="200" y="398" font-size="15" font-style="italic">common-sense safety</text>
+  </g>
+</svg>

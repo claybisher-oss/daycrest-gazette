@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" font-family="Georgia, 'Iowan Old Style', serif">
+  <rect width="400" height="300" fill="#faf7f0"/>
+  <text x="200" y="28" font-size="18" font-weight="bold" text-anchor="middle" fill="#1d1b18">Length, side by side</text>
+  <!-- scale: 990 ft = 360 px -->
+  <g fill="#1d1b18">
+    <text x="20" y="60" font-size="15" font-weight="bold">SS United States (1952)</text>
+    <path d="M20,85 L380,85 L366,115 L34,115 Z"/>
+    <rect x="150" y="72" width="34" height="13"/><rect x="214" y="72" width="34" height="13"/>
+    <text x="380" y="138" font-size="15" text-anchor="end">≈ 990 ft</text>
+    <text x="20" y="172" font-size="15" font-weight="bold">RMS Titanic (1912)</text>
+    <path d="M20,195 L341,195 L329,225 L32,225 Z" fill="#6b655b"/>
+    <rect x="110" y="182" width="16" height="13" fill="#6b655b"/><rect x="150" y="182" width="16" height="13" fill="#6b655b"/>
+    <rect x="190" y="182" width="16" height="13" fill="#6b655b"/><rect x="230" y="182" width="16" height="13" fill="#6b655b"/>
+    <text x="341" y="248" font-size="15" text-anchor="end">≈ 883 ft</text>
+  </g>
+  <text x="200" y="285" font-size="13" font-style="italic" text-anchor="middle" fill="#6b655b">Silhouettes simplified; lengths to scale.</text>
+</svg>
