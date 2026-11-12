@@ -8,6 +8,9 @@ issue: Sample
 ---
 Most of Kentucky's insects spend winter as eggs, larvae or sleeping adults. The honey bee does something stranger: the whole colony stays awake and keeps itself warm through the cold months, living off the honey it stored up all summer.
 
+![Honey bee workers at a hive entrance](https://commons.wikimedia.org/wiki/Special:FilePath/Apis_mellifera_carnica_worker_hive_entrance_3.jpg?width=1000)
+*Photo: Makro Freak, [via Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Apis_mellifera_carnica_worker_hive_entrance_3.jpg)*
+
 ## Know it
 
 A honey bee is a slim, fuzzy bee about half an inch long, with amber-and-brown bands on its abdomen. Bumblebees are bigger and rounder, and they don't make it through winter as a colony: only new queens survive, alone and underground. In November, a bee you see moving around a hive entrance on a warm afternoon is almost certainly a honey bee.

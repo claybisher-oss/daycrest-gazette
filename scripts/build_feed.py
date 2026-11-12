@@ -173,7 +173,7 @@ def parse_article(path: Path) -> dict | None:
                 + "".join(f"<li>{inline(b)}</li>" for b in brief) + "</ul></div>\n" + body)
     if meta.get("source_url"):
         label = html.escape(meta.get("source") or "the original")
-        body += (f'\n<p class="source">Original: <a href="{html.escape(meta["source_url"])}">'
+        body += (f'\n<p class="source">Read the full story: <a href="{html.escape(meta["source_url"])}">'
                  f"{label}</a></p>")
     return {
         "slug": slug, "title": meta["title"], "date": when, "section": section,
