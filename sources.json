@@ -1,0 +1,32 @@
+{
+  "_note": "Creators the Gazette follows. 'feed' is filled in (and verified) by the daily run the first time it finds the creator's RSS/Atom feed; YouTube feeds are https://www.youtube.com/feeds/videos.xml?channel_id=<ID>. 'prefer' = which source to read first (their own writing beats a video description). 'stance' = 'disagree' marks voices followed in order to engage them fairly.",
+  "followed": [
+    {"name": "Foci", "kind": "youtube", "feed": null, "prefer": "video"},
+    {"name": "Reysu", "kind": "youtube", "feed": null, "prefer": "video"},
+    {"name": "Ryan Holiday / The Daily Stoic", "kind": "youtube+newsletter", "feed": null, "prefer": "writing"},
+    {"name": "Spencer's Adventures", "kind": "youtube", "feed": null, "prefer": "video"},
+    {"name": "Matt D'Avella", "kind": "youtube+newsletter", "feed": null, "prefer": "writing"},
+    {"name": "PewDiePie", "kind": "youtube", "feed": null, "prefer": "video"},
+    {"name": "The Holy Post", "kind": "podcast+substack", "feed": null, "prefer": "writing"},
+    {"name": "Gavin Ortlund (Truth Unites)", "kind": "youtube+substack", "feed": null, "prefer": "writing"},
+    {"name": "Ryan Reeves", "kind": "youtube", "feed": null, "prefer": "video"},
+    {"name": "Seedbed (J.D. Walt)", "kind": "blog", "feed": null, "prefer": "writing"},
+    {"name": "Fred Sanders (Scriptorium)", "kind": "blog", "feed": null, "prefer": "writing"},
+    {"name": "Alastair Roberts", "kind": "blog+podcast", "feed": null, "prefer": "writing"},
+    {"name": "Mere Orthodoxy", "kind": "magazine", "feed": null, "prefer": "writing"},
+    {"name": "Unbelievable?", "kind": "podcast+youtube", "feed": null, "prefer": "video"},
+    {"name": "Daily Dose of Greek", "kind": "youtube", "feed": null, "prefer": "video"},
+    {"name": "Daily Dose of Hebrew", "kind": "youtube", "feed": null, "prefer": "video"},
+    {"name": "Bill Mounce (Monday with Mounce)", "kind": "blog", "feed": null, "prefer": "writing"},
+    {"name": "BibleProject", "kind": "youtube+podcast", "feed": null, "prefer": "video"},
+    {"name": "Cal Newport", "kind": "blog+podcast", "feed": null, "prefer": "writing"},
+    {"name": "Alan Jacobs (Snakes and Ladders)", "kind": "blog+newsletter", "feed": null, "prefer": "writing"},
+    {"name": "Austin Kleon", "kind": "blog+newsletter", "feed": null, "prefer": "writing"},
+    {"name": "Front Porch Republic", "kind": "magazine", "feed": null, "prefer": "writing"},
+    {"name": "Matt Risinger (Build Show)", "kind": "youtube", "feed": null, "prefer": "video"},
+    {"name": "Orvis Fly Fishing podcast", "kind": "podcast", "feed": null, "prefer": "show-notes"},
+    {"name": "Sky & Telescope — This Week's Sky at a Glance", "kind": "web", "feed": null, "prefer": "writing"},
+    {"name": "Agadmator's Chess Channel", "kind": "youtube", "feed": null, "prefer": "video"},
+    {"name": "Doug Wilson", "kind": "blog+podcast", "feed": null, "prefer": "writing", "stance": "disagree"}
+  ]
+}
