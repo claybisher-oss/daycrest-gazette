@@ -3,9 +3,12 @@ title: Welcome to the Daycrest Gazette
 date: 2026-11-12 14:30
 section: Front Page
 summary: What lands in this feed each weekday, and how to read it.
+brief: A new issue every weekday, starting Monday, November 16 | Every story is a full article, written as an explainer with the source linked at the end | New posts from followed creators become write-ups, so you can read instead of watch
 issue: 0
 ---
-This is the Gazette's home in NetNewsWire. Starting **Monday, November 16**, a new issue arrives every weekday by about 6:30 in the morning, and each story comes through as a full article you can read right here.
+This is the Gazette's home in NetNewsWire. Every weekday morning the news and the creators you follow get turned into articles you can read straight through, here and in the PDF edition.
+
+![How an issue comes together each weekday morning](img/how-the-gazette-works.svg)
 
 ## What comes in each issue
 
@@ -14,10 +17,12 @@ This is the Gazette's home in NetNewsWire. Starting **Monday, November 16**, a n
 - **Wildcats:** UK sports.
 - **The weekday feature:** Around Town on Mondays and Thursdays, the Creek Report on Tuesdays and Fridays, and Kentucky Voices and Turntable on Wednesdays.
 - **Species of the Day.**
-- **Followed:** a written piece for each new video, episode or post from the creators you follow. Each one covers what it's about and its main ideas, then links to the original so you can decide whether to watch or listen.
+- **Followed:** a write-up of each new video, episode or post from the creators you follow.
 
-## How to read it
+## How the articles are built
 
-Everything is written in the Gazette's own words, and each story ends with a link to its source. If you only want one part, subscribe to a section feed instead (for example, just *Followed*). The links are on the front page.
+Each article is an explainer. It opens with an **In brief** box of three takeaways, includes a simple diagram when a picture makes the idea clearer, uses short headed sections, and closes with *Why it matters* and a link to the original. Reading time is shown at the top.
 
-The goal is simple: read more than you watch.
+## Why it matters
+
+The goal is simple: read more than you watch. Most videos and episodes can be understood in a few minutes of reading, and the link is there when one deserves your full attention.

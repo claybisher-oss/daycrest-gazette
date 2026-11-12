@@ -10,6 +10,7 @@ Article format (articles/YYYY-MM-DD-slug.md):
     date: 2026-11-16 06:17
     section: Followed          # Front Page, Faith, Wildcats, Followed, Nature, ...
     summary: One-line dek shown in lists.
+    brief: First takeaway | Second takeaway | Third   # optional "In brief" box
     source: The Holy Post      # optional
     source_url: https://...    # optional, "Read/watch the original" link
     issue: 1                   # optional Gazette issue number
@@ -118,6 +119,12 @@ def markdown_to_html(md: str) -> str:
                 list_tag = tag
             out.append(f"<li>{inline(m.group(2))}</li>")
             continue
+        if m := re.match(r"^!\[([^\]]*)\]\(([^)\s]+)\)\s*$", line.strip()):
+            flush_para(); flush_list()
+            cap = inline(m.group(1))
+            out.append(f'<figure><img src="{html.escape(m.group(2))}" alt="{cap}">'
+                       + (f"<figcaption>{cap}</figcaption>" if cap else "") + "</figure>")
+            continue
         flush_list()
         para.append(line.strip())
     flush_para(); flush_list(); flush_quote()
@@ -155,7 +162,12 @@ def parse_article(path: Path) -> dict | None:
         return None
     slug = path.stem
     section = meta.get("section", "Front Page")
+    words = len(re.findall(r"\w+", m.group(2)))
     body = markdown_to_html(m.group(2).strip())
+    brief = [b.strip() for b in meta.get("brief", "").split("|") if b.strip()]
+    if brief:
+        body = ('<div class="brief"><p><strong>In brief</strong></p><ul>'
+                + "".join(f"<li>{inline(b)}</li>" for b in brief) + "</ul></div>\n" + body)
     if meta.get("source_url"):
         label = html.escape(meta.get("source") or "the original")
         body += (f'\n<p class="source">Original: <a href="{html.escape(meta["source_url"])}">'
@@ -164,6 +176,7 @@ def parse_article(path: Path) -> dict | None:
         "slug": slug, "title": meta["title"], "date": when, "section": section,
         "summary": meta.get("summary", ""), "issue": meta.get("issue", ""),
         "source_url": meta.get("source_url", ""), "html": body,
+        "minutes": max(1, round(words / 230)),
     }
 
 
@@ -172,6 +185,11 @@ def section_slug(name: str) -> str:
 
 
 # ---------------------------------------------------------------- output
+def absolutize(body: str, base: str) -> str:
+    """Feed readers need absolute URLs for images and in-site links."""
+    return re.sub(r'(src|href)="(?!https?:|mailto:|#)/?([^"]+)"', rf'\1="{base}\2"', body)
+
+
 def rss(items: list[dict], title: str, desc: str, self_url: str, base: str) -> str:
     now = format_datetime(datetime.now(timezone.utc))
     parts = [
@@ -189,7 +207,7 @@ def rss(items: list[dict], title: str, desc: str, self_url: str, base: str) -> s
     ]
     for a in items:
         link = f"{base}a/{a['slug']}.html"
-        body = a["html"].replace("]]>", "]]]]><![CDATA[>")
+        body = absolutize(a["html"], base).replace("]]>", "]]]]><![CDATA[>")
         parts += [
             "<item>",
             f"<title>{html.escape(a['title'])}</title>",
@@ -252,11 +270,11 @@ def main() -> None:
             encoding="utf-8")
 
     for a in arts:
-        meta = f"{a['section']} · {a['date'].strftime('%a %b %-d, %Y')}"
+        meta = f"{a['section']} · {a['date'].strftime('%a %b %-d, %Y')} · {a['minutes']} min read"
         if a["issue"]:
             meta += f" · No. {a['issue']}"
         inner = (f'<article><div class="kicker">{html.escape(meta)}</div>'
-                 f"<h1>{html.escape(a['title'])}</h1>{a['html']}</article>")
+                 f"<h1>{html.escape(a['title'])}</h1>{absolutize(a['html'], base)}</article>")
         (OUT / "a" / f"{a['slug']}.html").write_text(page(a["title"], inner, base), encoding="utf-8")
 
     rows, last_day = [], None

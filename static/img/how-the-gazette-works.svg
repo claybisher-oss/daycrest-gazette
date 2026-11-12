@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 420" font-family="Georgia, 'Iowan Old Style', serif">
+  <rect width="400" height="420" fill="#faf7f0"/>
+  <defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1d1b18"/></marker></defs>
+  <g fill="none" stroke="#1d1b18" stroke-width="1.6">
+    <rect x="10" y="10" width="180" height="90" rx="6"/>
+    <rect x="210" y="10" width="180" height="90" rx="6" stroke-dasharray="5 4"/>
+    <rect x="80" y="160" width="240" height="90" rx="6" stroke-width="2.8"/>
+    <rect x="10" y="315" width="180" height="90" rx="6"/>
+    <rect x="210" y="315" width="180" height="90" rx="6"/>
+    <path d="M100,100 L170,157" marker-end="url(#ar)"/>
+    <path d="M300,100 L230,157" marker-end="url(#ar)"/>
+    <path d="M170,250 L100,312" marker-end="url(#ar)"/>
+    <path d="M230,250 L300,312" marker-end="url(#ar)"/>
+  </g>
+  <g fill="#1d1b18" text-anchor="middle">
+    <text x="100" y="45" font-size="19" font-weight="bold">The news</text>
+    <text x="100" y="70" font-size="15">local · NPR · faith</text>
+    <text x="100" y="90" font-size="15">UK · nature</text>
+    <text x="300" y="45" font-size="19" font-weight="bold">Followed</text>
+    <text x="300" y="70" font-size="15">new videos, episodes</text>
+    <text x="300" y="90" font-size="15">and posts</text>
+    <text x="200" y="195" font-size="20" font-weight="bold">6:17 AM edition</text>
+    <text x="200" y="220" font-size="15">verified · in our own words</text>
+    <text x="200" y="240" font-size="15">explainers with diagrams</text>
+    <text x="100" y="350" font-size="19" font-weight="bold">This feed</text>
+    <text x="100" y="375" font-size="15">full articles in</text>
+    <text x="100" y="395" font-size="15">NetNewsWire</text>
+    <text x="300" y="350" font-size="19" font-weight="bold">The PDF</text>
+    <text x="300" y="375" font-size="15">Kindle + phone</text>
+    <text x="300" y="395" font-size="15">listening edition</text>
+  </g>
+</svg>

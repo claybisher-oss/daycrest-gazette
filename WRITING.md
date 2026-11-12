@@ -15,6 +15,14 @@ This repo is **public** (GitHub Pages). Anyone with the link can read it.
 - Images: public-domain or openly licensed only, credited, saved under `static/img/`.
 - Sections: `Front Page`, `NPR`, `Faith`, `Wildcats`, `Weather`, `Around Town`, `Creek Report`, `Kentucky Voices`, `Turntable`, `Nature` (Species of the Day), `Followed`.
 
+## Explainer format (every article that's more than a brief)
+Modeled on AI "visual explainer" daily briefs: understand it in two minutes, go deeper if you want.
+1. `brief:` in front matter: 3 takeaways separated by `|` (renders as an **In brief** box at the top).
+2. One simple diagram when a picture beats prose: a timeline, a flow of an argument, a comparison, a map sketch, a "before vs after". Write it as a small hand-made SVG (grayscale, Georgia serif, viewBox 400 wide (tall rather than wide), text 15px+, readable on a phone) saved as `static/img/YYYY-MM-DD-slug.svg`, and put it on its own line: `![Caption that says what to notice](img/YYYY-MM-DD-slug.svg)`. No diagram rather than a decorative one. Public-domain photos/plates are fine too (credited in the caption).
+3. Short `##` sections in plain words; define any term the first time it appears.
+4. End with `## Why it matters` (2–4 sentences), then the source link (from `source_url`).
+5. Followed write-ups also get `## Worth watching?`: one honest line on whether the full video/episode adds much beyond the write-up, and which minutes to jump to if so.
+
 ## Followed (creators in `sources.json`)
 - Check each creator's feed for anything new since the last run (weekends roll into Monday).
 - One article per new video/episode/post, roughly 300–600 words: what it covers, the main ideas and why they matter, then the link. A write-up that points back to the original, never a replacement for it.
