@@ -143,7 +143,10 @@ def parse_article(path: Path) -> dict | None:
         line = re.sub(r"\s+#.*$", "", line)
         if ":" in line:
             k, v = line.split(":", 1)
-            meta[k.strip().lower()] = v.strip().strip('"').strip("'")
+            v = v.strip()
+            if len(v) >= 2 and v[0] == v[-1] and v[0] in "\"'":
+                v = v[1:-1]
+            meta[k.strip().lower()] = v
     if meta.get("draft", "").lower() in ("true", "yes"):
         return None
     for key in ("title", "date"):

@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 490" font-family="Georgia, 'Iowan Old Style', serif">
+  <rect width="400" height="490" fill="#faf7f0"/>
+  <text x="200" y="30" font-size="19" font-weight="bold" text-anchor="middle" fill="#1d1b18">Inside a hive in winter</text>
+  <text x="200" y="52" font-size="14" font-style="italic" text-anchor="middle" fill="#6b655b">a living ball of bees, seen from the side</text>
+  <!-- honeycomb frames -->
+  <g stroke="#b9b2a3" stroke-width="1.2">
+    <line x1="60" y1="75" x2="60" y2="385"/><line x1="110" y1="75" x2="110" y2="385"/>
+    <line x1="160" y1="75" x2="160" y2="385"/><line x1="210" y1="75" x2="210" y2="385"/>
+    <line x1="260" y1="75" x2="260" y2="385"/><line x1="310" y1="75" x2="310" y2="385"/>
+    <line x1="360" y1="75" x2="360" y2="385"/>
+  </g>
+  <rect x="40" y="75" width="340" height="80" fill="#d9d3c6" opacity="0.7"/>
+  <text x="210" y="110" font-size="15" text-anchor="middle" fill="#1d1b18">stored honey</text>
+  <text x="210" y="130" font-size="14" font-style="italic" text-anchor="middle" fill="#1d1b18">the cluster eats its way up</text>
+  <!-- cluster -->
+  <circle cx="210" cy="265" r="100" fill="#b9b2a3"/>
+  <circle cx="210" cy="265" r="58" fill="#6b655b"/>
+  <text x="210" y="260" font-size="16" font-weight="bold" text-anchor="middle" fill="#faf7f0">warm core</text>
+  <text x="210" y="280" font-size="14" text-anchor="middle" fill="#faf7f0">bees shiver to</text>
+  <text x="210" y="297" font-size="14" text-anchor="middle" fill="#faf7f0">make heat</text>
+  <text x="210" y="193" font-size="15" font-weight="bold" text-anchor="middle" fill="#1d1b18">outer shell</text>
+  <text x="210" y="400" font-size="14" text-anchor="middle" fill="#1d1b18">shell: tightly packed bees</text>
+  <text x="210" y="417" font-size="14" text-anchor="middle" fill="#1d1b18">hold the heat in</text>
+  <!-- arrows: rotation -->
+  <defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1d1b18"/></marker></defs>
+  <path d="M95,225 C70,265 75,300 102,325" fill="none" stroke="#1d1b18" stroke-width="1.8" marker-end="url(#ar)"/>
+  <path d="M325,305 C350,265 345,230 318,205" fill="none" stroke="#1d1b18" stroke-width="1.8" marker-end="url(#ar)"/>
+  <text x="200" y="446" font-size="15" text-anchor="middle" fill="#1d1b18">Arrows: bees take turns, moving</text>
+  <text x="200" y="464" font-size="15" text-anchor="middle" fill="#1d1b18">between the cold shell and warm core.</text>
+  <text x="200" y="484" font-size="12" font-style="italic" text-anchor="middle" fill="#6b655b">Simplified; not to scale.</text>
+</svg>
