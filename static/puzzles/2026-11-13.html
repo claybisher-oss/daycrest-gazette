@@ -1,0 +1,38 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Saturday Crossword — Nov. 13, 2026</title>
+<style>
+:root{--bg:#faf8f3;--ink:#1d1d1b;--line:#444;--hi:#e8e1cf;--cur:#cfc3a3;--bad:#b23;}
+@media (prefers-color-scheme:dark){:root{--bg:#1b1a17;--ink:#eee;--line:#aaa;--hi:#3a372f;--cur:#5b5443;}}
+body{background:var(--bg);color:var(--ink);font-family:Georgia,serif;margin:0;padding:16px;}
+h1{font-weight:normal;font-size:1.5rem;margin:.2rem 0}.sub{font-style:italic;margin:0 0 1rem}
+#grid{display:grid;grid-template-columns:repeat(11,1fr);width:min(100%,460px);aspect-ratio:1;border:2px solid var(--line);}
+.c{position:relative;border:.5px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:clamp(14px,4.5vw,22px);text-transform:uppercase;cursor:pointer;user-select:none}
+.b{background:var(--ink)}.n{position:absolute;top:1px;left:2px;font-size:9px}
+.hl{background:var(--hi)}.cur{background:var(--cur)}.wrong{color:var(--bad)}
+#clue{min-height:2.4em;margin:.6rem 0;font-weight:bold}
+button{font-family:inherit;font-size:1rem;margin:.2rem .3rem .2rem 0;padding:.4rem .8rem;border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:4px}
+.cols{display:flex;flex-wrap:wrap;gap:1.5rem}.cols div{flex:1 1 240px}ol{padding-left:1.6em}li{margin:.2em 0}
+#kb{position:absolute;opacity:0;width:1px;height:1px}
+</style></head><body>
+<h1>Saturday Crossword</h1><p class="sub">The Daycrest Gazette · No. 1 · Friday, November 13, 2026 · an original 11×11</p>
+<input id="kb" autocapitalize="characters" autocomplete="off">
+<div id="grid"></div><div id="clue"></div>
+<button id="chk">Check</button><button id="rev">Reveal</button><button id="clr">Clear</button>
+<div class="cols"><div><h2>Across</h2><ol id="A"></ol></div><div><h2>Down</h2><ol id="D"></ol></div></div>
+<script>
+const P=["###....#...", "##.....#...", "##.....#...", "...##....##", "....#...###", "....###....", "###...#....", "##....##...", "...#.....##", "...#.....##", "...#....###"],AC={"1": "Diner card listing the specials", "5": "Received", "8": "Episode you've seen before", "9": "\"___ Father, who art in heaven\"", "10": "Motionless, like a log on the creek bank", "11": "Hog's home", "12": "Playground chasing game", "14": "Long breath of relief", "16": "Revise a draft", "18": "Slippery river swimmer", "19": "Point where a leaf meets the stem", "20": "Lemon juice's sour quality", "24": "Sense of self", "27": "\"Double ___\" (playground challenge)", "28": "Give off, as light", "29": "Like a just-opened notebook", "30": "Down in the dumps", "32": "Leading, as at halftime", "35": "11-Across resident", "36": "Recently", "37": "\"You ___ the salt of the earth\" (Matthew 5:13)", "38": "Sycamore or tulip poplar, for one"},DN={"1": "Fishers of ___ (Mark 1:17)", "2": "Before, in old verse", "3": "Hospital caregiver", "4": "Loosen, as a fly-line knot", "5": "\"Oh my ___!\"", "6": "Not in", "7": "Give it a shot", "8": "Stiff", "12": "Number of commandments", "13": "\"Much ___ About Nothing\"", "15": "Happy", "17": "Swarm, as a creek with minnows", "21": "Halloween haul", "22": "Anger", "23": "Morning moisture on the pasture", "25": "Goliath, for one", "26": "Not this one", "28": "Rim of the river palisades", "30": "Place for a soak", "31": "What a kite rides on", "33": "Mother sheep", "34": "Pub pour"},S=atob("IyMjZWVydCNlcmEjI3lsd2VuI2dpcCMjZGFlaGEjZGFzd2VuIyN0aW1lIyNlcmFkI29nZSMjI2RpY2EjIyNlZG9uIyMjbGVlI3RpZGUjI2hnaXMjI2dhdHl0cyN0cmVuaSMjcnVvI251cmVyIyN0b2cjdW5lbSMjIw==").split("").reverse().join("");
+const N=11,G=document.getElementById("grid"),kb=document.getElementById("kb");let cells=[],nums={},cur=[0,0],dir="A";
+let n=0;for(let r=0;r<N;r++)for(let c=0;c<N;c++){const d=document.createElement("div");d.className="c";const blk=P[r][c]=="#";if(blk)d.classList.add("b");else{const sa=(c==0||P[r][c-1]=="#")&&c+1<N&&P[r][c+1]!="#",sd=(r==0||P[r-1][c]=="#")&&r+1<N&&P[r+1][c]!="#";if(sa||sd){n++;nums[r+","+c]=n;const s=document.createElement("span");s.className="n";s.textContent=n;d.appendChild(s)}const t=document.createElement("span");t.className="t";d.appendChild(t);d.onclick=()=>{if(cur[0]==r&&cur[1]==c)dir=dir=="A"?"D":"A";cur=[r,c];draw();kb.focus()}}G.appendChild(d);cells.push(d)}
+const open=(r,c)=>r>=0&&c>=0&&r<N&&c<N&&P[r][c]!="#";
+function word(r,c,d){const[dr,dc]=d=="A"?[0,1]:[1,0];while(open(r-dr,c-dc)){r-=dr;c-=dc}const s=[r,c],out=[];while(open(r,c)){out.push([r,c]);r+=dr;c+=dc}return{s,out}}
+function draw(){cells.forEach(x=>x.classList.remove("hl","cur"));let w=word(cur[0],cur[1],dir);if(w.out.length<3){dir=dir=="A"?"D":"A";w=word(cur[0],cur[1],dir)}w.out.forEach(([r,c])=>cells[r*N+c].classList.add("hl"));cells[cur[0]*N+cur[1]].classList.add("cur");const num=nums[w.s[0]+","+w.s[1]];document.getElementById("clue").textContent=num+(dir=="A"?" Across: ":" Down: ")+(dir=="A"?AC:DN)[num]}
+function step(k){const[dr,dc]=dir=="A"?[0,1]:[1,0];let r=cur[0]+dr*k,c=cur[1]+dc*k;if(open(r,c))cur=[r,c]}
+function setL(ch){const t=cells[cur[0]*N+cur[1]].querySelector(".t");t.textContent=ch;cells[cur[0]*N+cur[1]].classList.remove("wrong")}
+document.addEventListener("keydown",e=>{const k=e.key;if(/^[a-zA-Z]$/.test(k)){setL(k.toUpperCase());step(1)}else if(k=="Backspace"){setL("");step(-1)}else if(k.startsWith("Arrow")){const m={ArrowRight:[0,1,"A"],ArrowLeft:[0,-1,"A"],ArrowDown:[1,0,"D"],ArrowUp:[-1,0,"D"]}[k];if(dir!=m[2])dir=m[2];else if(open(cur[0]+m[0],cur[1]+m[1]))cur=[cur[0]+m[0],cur[1]+m[1]]}else return;e.preventDefault();draw()});
+kb.addEventListener("input",()=>{const v=kb.value.slice(-1);kb.value="";if(/[a-z]/i.test(v)){setL(v.toUpperCase());step(1);draw()}});
+document.getElementById("chk").onclick=()=>cells.forEach((x,i)=>{const t=x.querySelector(".t");if(t&&t.textContent&&t.textContent.toLowerCase()!=S[i])x.classList.add("wrong")});
+document.getElementById("rev").onclick=()=>{if(confirm("Reveal the whole puzzle?"))cells.forEach((x,i)=>{const t=x.querySelector(".t");if(t){t.textContent=S[i].toUpperCase();x.classList.remove("wrong")}})};
+document.getElementById("clr").onclick=()=>cells.forEach(x=>{const t=x.querySelector(".t");if(t){t.textContent="";x.classList.remove("wrong")}});
+for(const[k,L]of[["A",AC],["D",DN]])for(const num in L){const li=document.createElement("li");li.value=num;li.textContent=L[num];document.getElementById(k).appendChild(li)}
+for(let r=0;r<N;r++)for(let c=0;c<N;c++)if(open(r,c)){cur=[r,c];r=N;break}draw();
+</script></body></html>
