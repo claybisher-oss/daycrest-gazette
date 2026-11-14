@@ -10,6 +10,9 @@ source_url: https://abcnews.com/Sports/wireStory/florida-visits-13-kentucky-sec-
 ---
 Kentucky comes home after its worst game of the season. Florida comes to Lexington needing one more win to be bowl-eligible, with a first-year coach who knows Kentucky well. Here's what you need to watch like an insider.
 
+![Kroger Field under the lights during a Kentucky home game — tonight's setting](https://commons.wikimedia.org/wiki/Special:FilePath/Kroger_Field,_Kentucky_vs._Arkansas,_October_2019.jpg?width=1000)
+*Photo: PCN02WPS, [CC BY-SA 4.0 via Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Kroger_Field%2C_Kentucky_vs._Arkansas%2C_October_2019.jpg)*
+
 ## The basics
 
 - **When:** tonight, 6:15 p.m. ET, Kroger Field, Lexington
