@@ -100,7 +100,7 @@ Kentucky has never made the College Football Playoff. Win tonight and at Missour
 ![Yard lines every five yards: a first down means covering two of these stripes](https://images.unsplash.com/photo-1575317988650-5faf389cabef?ixlib=rb-4.1.0&q=80&fm=jpg&crop=entropy&cs=tinysrgb&fit=max&w=1000)
 *Photo by [Joshua Hanson](https://unsplash.com/@joshuahanson43?utm_source=daycrest_gazette&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=daycrest_gazette&utm_medium=referral)*
 
-![Watch a drive: the solid line is the ball, the dashed line is the line to gain; third down decides whether the drive lives](img/2026-11-14-third-down.gif)
+![Watch a drive: the solid line is the ball, the dashed line is the line to gain; third down decides whether the drive lives](img/2026-11-14-third-down-v2.gif)
 
 A team gets four tries ("downs") to gain 10 yards. Most teams use the first three to move the ball and punt on fourth. So **third down** is the money down: convert it and the drive lives; fail and you usually give the ball away.
 
