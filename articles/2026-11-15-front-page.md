@@ -15,4 +15,4 @@ WEKU [rounded up](https://www.weku.org/lexington-richmond/2026-11-13/want-to-sho
 Historian and author Kent Masterson Brown speaks at the county's [America 250 event](https://jessamineky.gov/event/celebrate-america-250-with-kent-masterson-brown/) this afternoon, 2-4 PM, at East Jessamine High School.
 
 ## Why it matters
-Shopping local keeps holiday dollars with Central Kentucky makers, and the America 250 series is a free way to learn local history ahead of the nation's 250th birthday in 2026.
+Shopping local keeps holiday dollars with Central Kentucky makers, and the America 250 series is a free way to learn local history during the nation's 250th-anniversary year.
