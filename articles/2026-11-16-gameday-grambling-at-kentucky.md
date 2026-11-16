@@ -10,7 +10,7 @@ source_url: https://ukathletics.com/news/2026/11/15/big-blue-preview-kentucky-vs
 ---
 Kentucky comes back to Rupp three days after a game it nearly gave away, and four days before a Friday-night date with Indiana in Indianapolis. Tonight is a first: Kentucky and Grambling State have never played. On paper it's a mismatch. The real questions are about Kentucky: does the defense look better, do the Cats rebound, and how much do the starters play?
 
-![Positions 1 through 5 on a half court](/daycrest-gazette/static/img/2026-11-16-positions-1-5.svg)
+![Positions 1 through 5 on a half court](img/2026-11-16-positions-1-5.png)
 *Diagram: the five positions — tonight's "Learn one thing."*
 
 ## The basics
