@@ -31,3 +31,8 @@ figure { margin:1.4rem 0; } figcaption { font-size:.85rem; color:var(--muted); f
 table { border-collapse:collapse; width:100%; font-size:.85rem; margin:1rem 0; }
 th, td { border-bottom:1px solid var(--rule); padding:.25rem .3rem; text-align:left; }
 th { font-variant: small-caps; }
+
+figure.audio{margin:1rem 0;padding:.6rem .8rem;border:1px solid #ccc;border-radius:8px}
+figure.audio audio,figure.video video{width:100%}
+figure.audio figcaption{font-size:.85rem;margin-top:.3rem}
+p.clip{font-weight:600}

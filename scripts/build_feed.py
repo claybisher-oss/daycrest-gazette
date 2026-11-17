@@ -136,6 +136,22 @@ def markdown_to_html(md: str) -> str:
                 list_tag = tag
             out.append(f"<li>{inline(m.group(2))}</li>")
             continue
+        if m := re.match(r"^!audio\[([^\]]*)\]\(([^)\s]+)\)\s*$", line.strip()):
+            flush_para(); flush_list()
+            cap, src = inline(m.group(1)), html.escape(m.group(2))
+            out.append(f'<figure class="audio"><audio controls preload="none" src="{src}">'
+                       f'<a href="{src}">Play the recording</a></audio>'
+                       f'<figcaption>🔊 {cap} · <a href="{src}">open audio</a></figcaption></figure>')
+            continue
+        if m := re.match(r"^!video\[([^\]]*)\]\(([^)\s]+)\)\s*$", line.strip()):
+            flush_para(); flush_list()
+            cap, src = inline(m.group(1)), html.escape(m.group(2))
+            if src.lower().split("?")[0].endswith((".mp4", ".webm", ".mov")):
+                out.append(f'<figure class="video"><video controls preload="none" playsinline src="{src}"></video>'
+                           f'<figcaption>▶ {cap}</figcaption></figure>')
+            else:
+                out.append(f'<p class="clip">▶ <a href="{src}">{cap}</a></p>')
+            continue
         if m := re.match(r"^!\[([^\]]*)\]\(([^)\s]+)\)\s*$", line.strip()):
             flush_para(); flush_list()
             cap = inline(m.group(1))
@@ -248,6 +264,20 @@ def build_issues(arts: list[dict]) -> list[dict]:
     return issues
 
 
+def enclosure(body: str, base: str) -> list[str]:
+    """First audio in the issue becomes the RSS enclosure (feed readers show a play button)."""
+    m = re.search(r'<audio[^>]*src="([^"]+)"', body)
+    if not m:
+        return []
+    url = m.group(1)
+    size = 0
+    if url.startswith(base):
+        f = STATIC / url[len(base):]
+        size = f.stat().st_size if f.exists() else 0
+    typ = "audio/mpeg" if url.lower().endswith(".mp3") else "audio/ogg" if url.lower().endswith((".ogg", ".oga")) else "audio/mp4"
+    return [f'<enclosure url="{html.escape(url)}" length="{size}" type="{typ}"/>']
+
+
 def rss(issues: list[dict], base: str) -> str:
     now = format_datetime(datetime.now(timezone.utc))
     t = html.escape(CONFIG["title"])
@@ -268,7 +298,7 @@ def rss(issues: list[dict], base: str) -> str:
         parts += ["<item>", f"<title>{html.escape(i['title'])}</title>", f"<link>{link}</link>",
                   f'<guid isPermaLink="true">{link}</guid>', f"<pubDate>{format_datetime(i['date'])}</pubDate>",
                   f"<description>{html.escape(i['summary'])}</description>",
-                  f"<content:encoded><![CDATA[{body}]]></content:encoded>", "</item>"]
+                  f"<content:encoded><![CDATA[{body}]]></content:encoded>"] + enclosure(body, base) + ["</item>"]
     parts += ["</channel>", "</rss>"]
     return "\n".join(parts) + "\n"
 

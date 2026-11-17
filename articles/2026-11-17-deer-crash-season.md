@@ -1,7 +1,7 @@
 ---
 title: "November Is Peak Season for Deer Crashes"
 date: 2026-11-17 04:31
-section: Bluegrass Front Page
+section: Front Page
 summary: Deer are on the move during the rut, and November is the worst month of the year for collisions on Kentucky roads.
 brief: 3,411 deer crashes in Kentucky in 2025, the most in seven years | 823 of them came in November | Watch at dawn and dusk; brake in your lane, don't swerve
 source: LEX 18

@@ -62,3 +62,17 @@ Plus the weekday features already in the task (Around Town Mon/Thu, Creek Report
 
 ## Publishing
 Commit to `main`; the Actions workflow builds `_site/` and deploys. Feed: `https://<owner>.github.io/<repo>/feed.xml`.
+
+## Media in every issue (Clay, Nov 17: "the RSS feed is the feed for the rest of my life — nothing else")
+This feed replaces every other feed, so each issue should be rich, not just text. Minimums for EVERY daily issue:
+- **Species of the Day (`section: Nature`)**: a real photo of the species (Commons / Unsplash / federal PD, credited), a **recording of its song or call** (birds, frogs, insects, mammals that call) embedded as audio, and a designed **Canva field-guide card** (ID marks, how to recognize it). Plants/fungi: photo + card (no audio).
+- **At least one designed Canva graphic per issue** besides the species card when it teaches something (a weather strip, a game-day matchup card, a "how it works" explainer). Export PNG → save to `static/img/` (≤1000 px JPEG). Never decorative filler; every graphic must teach.
+- **A lead photo for each major story** where a freely licensed one exists (place, object, animal — never faces or news/team photos).
+
+### Syntax (build_feed.py)
+- Image: `![Caption that says what to notice](img/YYYY-MM-DD-slug.jpg)` + credit line in italics under it.
+- Audio: `!audio[Caption](img/YYYY-MM-DD-slug.mp3)` on its own line, then an italic credit line. Self-host MP3 in `static/img/` (MP3 plays on iPhone; OGG does not). The first audio in an issue also becomes the RSS `<enclosure>`, so feed readers show a play button.
+- Video: `!video[Caption (~N min)](URL)` — a self-hosted .mp4 plays inline; any other URL (YouTube official clip, etc.) becomes a "▶" link. Max 3 "worth watching" picks a week; clips ≤5 min don't count.
+
+### Sources for sound
+Wikimedia Commons audio (many files mirror xeno-canto recordings under CC BY / CC BY-SA), federal public-domain recordings (NPS, USFWS). Credit recordist + license + link. Never synthesize a bird song. Prefer recordings labeled "song" over "call" for the main clip.

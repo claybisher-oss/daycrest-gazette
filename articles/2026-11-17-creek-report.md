@@ -1,7 +1,7 @@
 ---
 title: "The Creek Report: November Trout and New Pond Rules"
 date: 2026-11-17 04:36
-section: The Creek Report
+section: Creek Report
 summary: November trout stockings land at several Central Kentucky lakes, and Kentucky Fish & Wildlife sums up regulation changes that took effect Nov. 5.
 brief: Rolex Lake and Logan Hubble Park Lake get 1,500 trout each | No trout rules changed on Nov. 5 | Below Wolf Creek Dam, check the generation schedule before wading
 source: Kentucky Department of Fish & Wildlife Resources

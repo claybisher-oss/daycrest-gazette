@@ -1,7 +1,7 @@
 ---
 title: "Faith & Church: Grief in Jordan, and AI That Misquotes Scripture"
 date: 2026-11-17 04:34
-section: Faith & Church
+section: Faith
 summary: Jordan's Christians mourn after a deadly attack on a church in Karak, and the head of YouVersion warns that AI chatbots often get Bible verses wrong.
 brief: Nine killed in the Oct. 23 attack on St. George's in Karak | A Jordanian court sentenced three men on Nov. 15 | YouVersion says AI misquotes Scripture 15% of the time or more
 source: Christianity Today

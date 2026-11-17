@@ -1,7 +1,7 @@
 ---
 title: "Front Page: Election Reviews, a Governor's Race Begins, Grammy Ties"
 date: 2026-11-17 04:32
-section: Bluegrass Front Page
+section: Front Page
 summary: Kentucky's attorney general starts random post-election reviews, Rep. James Comer launches a campaign for governor, and Kentucky artists collect Grammy nominations.
 brief: 12 randomly chosen counties get a routine post-election review | Rep. James Comer is running for governor | Stapleton, Knocked Loose and Billy Strings earn Grammy nods
 source: WKYT
