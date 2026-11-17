@@ -266,15 +266,17 @@ def build_issues(arts: list[dict]) -> list[dict]:
 
 def enclosure(body: str, base: str) -> list[str]:
     """First audio in the issue becomes the RSS enclosure (feed readers show a play button)."""
-    m = re.search(r'<audio[^>]*src="([^"]+)"', body)
-    if not m:
+    srcs = re.findall(r'<audio[^>]*src="([^"]+)"', body)
+    if not srcs:
         return []
-    url = m.group(1)
+    briefs = [u for u in srcs if "-brief" in u]  # the narrated brief wins over other clips
+    url = (briefs or srcs)[0]
     size = 0
     if url.startswith(base):
         f = STATIC / url[len(base):]
         size = f.stat().st_size if f.exists() else 0
-    typ = "audio/mpeg" if url.lower().endswith(".mp3") else "audio/ogg" if url.lower().endswith((".ogg", ".oga")) else "audio/mp4"
+    typ = ("audio/mpeg" if url.lower().endswith(".mp3") else "audio/ogg" if url.lower().endswith((".ogg", ".oga"))
+           else "audio/x-m4a" if url.lower().endswith(".m4a") else "audio/mp4")
     return [f'<enclosure url="{html.escape(url)}" length="{size}" type="{typ}"/>']
 
 
@@ -299,6 +301,29 @@ def rss(issues: list[dict], base: str) -> str:
                   f'<guid isPermaLink="true">{link}</guid>', f"<pubDate>{format_datetime(i['date'])}</pubDate>",
                   f"<description>{html.escape(i['summary'])}</description>",
                   f"<content:encoded><![CDATA[{body}]]></content:encoded>"] + enclosure(body, base) + ["</item>"]
+    parts += ["</channel>", "</rss>"]
+    return "\n".join(parts) + "\n"
+
+
+def podcast(issues: list[dict], base: str) -> str:
+    """podcast.xml: only the narrated briefs (files named *-brief.*), for Apple Podcasts / Overcast."""
+    t = html.escape(CONFIG["title"] + " — Audio Brief")
+    parts = ['<?xml version="1.0" encoding="UTF-8"?>',
+             '<rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" '
+             'xmlns:atom="http://www.w3.org/2005/Atom">', "<channel>", f"<title>{t}</title>", f"<link>{base}</link>",
+             "<description>The day's Gazette, read aloud.</description>", "<language>en-us</language>",
+             f'<atom:link href="{base}podcast.xml" rel="self" type="application/rss+xml"/>',
+             f'<itunes:image href="{base}icon.png"/>', "<itunes:explicit>false</itunes:explicit>",
+             "<itunes:block>Yes</itunes:block>"]
+    for i in issues:
+        body = absolutize(i["html"], base)
+        enc = [e for e in enclosure(body, base) if "-brief" in e]
+        if not enc:
+            continue
+        link = f"{base}a/{i['slug']}.html"
+        parts += ["<item>", f"<title>{html.escape(i['title'])}</title>", f"<link>{link}</link>",
+                  f'<guid isPermaLink="false">{link}#brief</guid>', f"<pubDate>{format_datetime(i['date'])}</pubDate>",
+                  f"<description>{html.escape(i['summary'])}</description>"] + enc + ["</item>"]
     parts += ["</channel>", "</rss>"]
     return "\n".join(parts) + "\n"
 
@@ -337,6 +362,7 @@ def main() -> None:
                 shutil.copytree(f, OUT / f.name)
 
     (OUT / "feed.xml").write_text(rss(issues[:FEED_LIMIT], base), encoding="utf-8")
+    (OUT / "podcast.xml").write_text(podcast(issues[:FEED_LIMIT], base), encoding="utf-8")
     for i in issues:
         meta = i["date"].strftime("%A, %B %-d, %Y") + (f" · {i['edition']}" if i["edition"] else "")
         if i["number"]:
