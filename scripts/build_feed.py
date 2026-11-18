@@ -202,6 +202,8 @@ def parse_article(path: Path) -> dict | None:
     body = markdown_to_html(m.group(2).strip())
     brief = [b.strip() for b in meta.get("brief", "").split("|") if b.strip()]
     if brief:
+        # one "In brief" only: drop a hand-written body section when front matter has one
+        body = re.sub(r"(?im)^#{2,3} In brief\s*\n(?:[-*] .*\n)+\n?", "", body, count=1)
         body = ('<div class="brief"><p><strong>In brief</strong></p><ul>'
                 + "".join(f"<li>{inline(b)}</li>" for b in brief) + "</ul></div>\n" + body)
     if meta.get("source_url"):

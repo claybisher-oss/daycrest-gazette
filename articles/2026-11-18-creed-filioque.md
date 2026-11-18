@@ -8,11 +8,6 @@ source: Britannica
 source_url: https://www.britannica.com/topic/Filioque
 issue: 4
 ---
-## In brief
-- The Nicene Creed of 381 says the Holy Spirit "proceeds from the Father."
-- Western churches later added *filioque*, "and the Son" — first at the Third Council of Toledo in Spain (589); Rome adopted it in the sung creed around 1014.
-- Eastern churches objected, and the dispute became one strand of the East–West break usually dated to 1054.
-
 ## Why the East objected
 Two reasons: the West changed a creed all the churches shared without an ecumenical council, and the phrase seemed to blur the Father as the one source within the Trinity. Western theologians answered that the addition guarded the Son's full equality with the Father. Many Protestant churches inherited the Western wording.
 
