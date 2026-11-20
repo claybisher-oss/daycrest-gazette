@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" font-family="Georgia, serif">
+<rect width="400" height="300" fill="#ffffff"/>
+<text x="200" y="28" text-anchor="middle" font-size="18" font-weight="bold" fill="#222">Free-throw rate: national rank</text>
+<text x="200" y="50" text-anchor="middle" font-size="15" fill="#555">(how often a team gets to the line)</text>
+<line x1="40" y1="150" x2="360" y2="150" stroke="#444" stroke-width="4"/>
+<text x="40" y="180" text-anchor="middle" font-size="15" fill="#444">1st</text>
+<text x="360" y="180" text-anchor="middle" font-size="15" fill="#444">365th</text>
+<circle cx="48" cy="150" r="10" fill="#222"/>
+<text x="62" y="118" font-size="16" font-weight="bold" fill="#222">Indiana 26th</text>
+<text x="62" y="100" font-size="15" fill="#555">~31 free throws a game</text>
+<circle cx="335" cy="150" r="10" fill="#888"/>
+<text x="335" y="220" text-anchor="middle" font-size="16" font-weight="bold" fill="#222">Kentucky 339th</text>
+<text x="200" y="265" text-anchor="middle" font-size="15" fill="#444">Tonight's question: can Kentucky defend</text>
+<text x="200" y="285" text-anchor="middle" font-size="15" fill="#444">without fouling — and earn trips of its own?</text>
+</svg>
