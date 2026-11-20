@@ -1,0 +1,21 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Daily Mini — Nov 19, 2026</title>
+<style>body{font-family:Georgia,serif;max-width:420px;margin:16px auto;padding:0 16px;background:#fff;color:#111}h1{font-size:1.3em}
+table{border-collapse:collapse;margin:8px 0}td{width:56px;height:56px;border:2px solid #111;position:relative;padding:0}td.b{background:#111}
+td input{width:100%;height:100%;border:0;text-align:center;font-size:26px;text-transform:uppercase;background:transparent}td span{position:absolute;top:2px;left:4px;font-size:11px}
+.ok{background:#e6f4e6}.bad{background:#fbe3e3}button{font-size:15px;margin:4px 6px 4px 0;padding:6px 10px}ol{padding-left:20px}</style></head><body>
+<h1>Daily Mini · Thu Nov 19, 2026</h1><table id="g"></table>
+<button onclick="chk()">Check</button><button onclick="rev()">Reveal</button><button onclick="clr()">Clear</button>
+<h3>Across</h3><ol id="a"></ol><h3>Down</h3><ol id="d"></ol>
+<script>const M={"grid": ["HEART", "EMBER", "ABUSE", "RESIN", "TREND"], "numbers": {"1": [0, 0], "2": [0, 1], "3": [0, 2], "4": [0, 3], "5": [0, 4], "6": [1, 0], "7": [2, 0], "8": [3, 0], "9": [4, 0]}, "across": {"1": ["Valentine shape"], "6": ["Glowing bit in a dying fire"], "7": ["Misuse"], "8": ["Sticky tree sap"], "9": ["What's in fashion"]}, "down": {"1": ["Seat of feeling"], "2": ["Last coal"], "3": ["Treat badly"], "4": ["Pine product"], "5": ["Direction things are heading"]}};const g=document.getElementById('g');const inp=[];
+const num={};for(const[k,v]of Object.entries(M.numbers))num[v[0]+','+v[1]]=k;
+let st=(location.hash.slice(1)||'').padEnd(25,'.');
+for(let r=0;r<5;r++){const tr=g.insertRow();inp[r]=[];for(let c=0;c<5;c++){const td=tr.insertCell();if(M.grid[r][c]=='#'){td.className='b';continue}
+if(num[r+','+c])td.innerHTML='<span>'+num[r+','+c]+'</span>';const i=document.createElement('input');i.maxLength=1;const ch=st[r*5+c];if(ch!='.')i.value=ch;
+i.oninput=()=>{save();let n=c+1;while(n<5&&M.grid[r][n]=='#')n++;if(n<5&&i.value)inp[r][n].focus()};td.appendChild(i);inp[r][c]=i}}
+function save(){let s='';for(let r=0;r<5;r++)for(let c=0;c<5;c++)s+=(inp[r][c]&&inp[r][c].value)?inp[r][c].value.toUpperCase():'.';history.replaceState(null,'','#'+s)}
+function each(f){for(let r=0;r<5;r++)for(let c=0;c<5;c++)if(inp[r][c])f(inp[r][c],M.grid[r][c])}
+function chk(){each((i,a)=>{i.parentNode.className=i.value?(i.value.toUpperCase()==a?'ok':'bad'):''})}
+function rev(){each((i,a)=>i.value=a);save()}function clr(){each(i=>{i.value='';i.parentNode.className=''});save()}
+for(const[k,v]of Object.entries(M.across))document.getElementById('a').innerHTML+='<li value="'+k+'">'+v[0]+'</li>';
+for(const[k,v]of Object.entries(M.down))document.getElementById('d').innerHTML+='<li value="'+k+'">'+v[0]+'</li>';
+</script></body></html>
