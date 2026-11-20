@@ -227,7 +227,7 @@ def section_slug(name: str) -> str:
 # ---------------------------------------------------------------- output
 # One feed item per issue: all of a day's articles combined into a single post.
 # An article may set `edition: Breakfast|Lunch|Dinner` to split a day into at most three posts.
-SECTION_ORDER = ["Almanac", "Weather", "Front Page", "Nation & World", "Faith", "Wildcats",
+SECTION_ORDER = ["Almanac", "Weather", "Front Page", "Nation & World", "Faith", "Wildcats", "Sports",
                  "Around Town", "Creek Report", "Kentucky Voices", "Turntable", "Sky",
                  "Farm & Garden", "Creed & Controversy", "Ideas", "Crossword", "Followed", "Nature"]
 EDITION_ORDER = {"Breakfast": 0, "": 1, "Lunch": 1, "Dinner": 2}
