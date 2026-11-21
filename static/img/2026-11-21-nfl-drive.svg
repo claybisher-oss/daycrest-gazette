@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 300" font-family="Georgia, serif">
+<rect width="800" height="300" fill="#f7f3ea"/>
+<rect x="40" y="90" width="720" height="110" fill="#3b7a3f"/>
+<rect x="40" y="90" width="60" height="110" fill="#fb4f14"/><rect x="700" y="90" width="60" height="110" fill="#5a1414"/>
+<g stroke="#fff" stroke-opacity="0.6">
+<line x1="160" y1="90" x2="160" y2="200"/><line x1="220" y1="90" x2="220" y2="200"/><line x1="280" y1="90" x2="280" y2="200"/><line x1="340" y1="90" x2="340" y2="200"/><line x1="400" y1="90" x2="400" y2="200" stroke-width="3"/><line x1="460" y1="90" x2="460" y2="200"/><line x1="520" y1="90" x2="520" y2="200"/><line x1="580" y1="90" x2="580" y2="200"/><line x1="640" y1="90" x2="640" y2="200"/></g>
+<g fill="#fff" font-size="13" text-anchor="middle" font-family="Arial"><text x="160" y="215" fill="#333">10</text><text x="220" y="215" fill="#333">20</text><text x="280" y="215" fill="#333">30</text><text x="340" y="215" fill="#333">40</text><text x="400" y="215" fill="#333">50</text><text x="460" y="215" fill="#333">40</text><text x="520" y="215" fill="#333">30</text><text x="580" y="215" fill="#333">20</text><text x="640" y="215" fill="#333">10</text></g>
+<path d="M190 145 L250 145 L310 145 L400 145 L470 145 L540 145 L600 145 L700 145" stroke="#ffd23f" stroke-width="5" fill="none" stroke-dasharray="2 0"/>
+<g fill="#ffd23f"><circle cx="190" cy="145" r="7"/><circle cx="250" cy="145" r="5"/><circle cx="310" cy="145" r="5"/><circle cx="400" cy="145" r="5"/><circle cx="470" cy="145" r="5"/><circle cx="540" cy="145" r="5"/><circle cx="600" cy="145" r="5"/></g>
+<polygon points="700,145 688,137 688,153" fill="#ffd23f"/>
+<text x="40" y="40" font-size="22" fill="#222">How an NFL drive works</text>
+<text x="40" y="66" font-size="14" fill="#444">Each dot = a new set of downs: 4 tries to gain 10 yards. Fail on 4th down → punt, field goal, or turnover.</text>
+<text x="40" y="245" font-size="14" fill="#444">Kickoff touchback: ball at the 35 (2025 rule). Cross midfield → field-goal range begins near the opponent's 35.</text>
+<text x="40" y="268" font-size="14" fill="#444">Two-minute warning: the clock stops at 2:00 left in each half (an automatic stoppage).</text>
+<text x="760" y="290" font-size="11" fill="#777" text-anchor="end">Diagram: Daycrest Gazette</text>
+</svg>
